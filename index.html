@@ -1,0 +1,2810 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-GRJ1X3LN05"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-GRJ1X3LN05');
+    </script>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UIForge Ultimate | Visual Systems Architect</title>
+    <link rel="icon" type="image/webp" href="https://uiforgeai.netlify.app/Gemini_Generated_Image_l70llnl70llnl70l.webp">
+    <meta name="description"
+        content="The ultimate visual systems architect for web developers. Build, refactor, and export clean, semantic HTML/CSS using AI-powered tools.">
+    <meta name="keywords"
+        content="visual editor, html builder, css architect, responsive design tool, ai coding assistant, web development, ui builder">
+    <meta name="author" content="UIForge Team">
+    <meta name="robots" content="index, follow">
+    <meta name="google-site-verification" content="OT-WGRtGTb9JfU2IIb8yU7ipUIB1FUoVjfViWL6x2OE" />
+    <link rel="canonical" href="https://uiforge.app/">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="UIForge Ultimate | Visual Systems Architect">
+    <meta property="og:description" content="Build, refactor, and export clean HTML/CSS with AI precision.">
+    <meta property="og:url" content="https://uiforge.app/">
+    <meta property="og:site_name" content="UIForge Ultimate">
+    <meta property="og:image" content="https://ibb.co/HpK1fTcp">
+    <meta property="og:image:type" content="image/webp">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="UIForge Ultimate Logo">
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:site" content="@UIForge">
+    <meta name="twitter:title" content="UIForge Ultimate | Visual Systems Architect">
+    <meta name="twitter:description" content="Build, refactor, and export clean HTML/CSS with AI precision.">
+    <meta name="twitter:image" content="https://ibb.co/HpK1fTcp">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebApplication",
+      "name": "UIForge Ultimate",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "All",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "USD"
+      },
+      "featureList": "Visual CSS Editing, AI Code Generation, Drag & Drop Builder, Real-time Preview"
+    }
+    </script>
+    <!-- JSZip for handling Zip files -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <!-- GOOGLE FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Outfit:wght@400;700;800&family=Fira+Code&display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-body: #050507;
+            --bg-panel: #121215;
+            --border: #27272a;
+            --primary: #8b5cf6;
+            --primary-glow: rgba(139, 92, 246, 0.4);
+            --accent: #ec4899;
+            --text-main: #e4e4e7;
+            --text-muted: #a1a1aa;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            outline: none;
+        }
+
+        html {
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+            overflow-y: auto;
+            position: relative;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* --- ANIMATIONS --- */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(0, 0);
+            }
+
+            50% {
+                transform: translate(-20px, 20px);
+            }
+
+            100% {
+                transform: translate(0, 0);
+            }
+        }
+
+        @keyframes pulse-glow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 20px var(--primary-glow);
+            }
+
+            50% {
+                box-shadow: 0 0 40px var(--primary-glow);
+            }
+        }
+
+        /* --- AURORA BG --- */
+        .aurora-blob {
+            position: fixed;
+            filter: blur(80px);
+            z-index: -2;
+            opacity: 0.4;
+            animation: float 10s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        .blob-1 {
+            top: -10%;
+            left: -10%;
+            width: 50vw;
+            height: 50vw;
+            background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+        }
+
+        .blob-2 {
+            bottom: -20%;
+            right: -10%;
+            width: 60vw;
+            height: 60vw;
+            background: radial-gradient(circle, #3b82f6 0%, transparent 70%);
+            animation-delay: -5s;
+        }
+
+        .blob-3 {
+            top: 40%;
+            left: 40%;
+            width: 30vw;
+            height: 30vw;
+            background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+            opacity: 0.2;
+            animation-duration: 15s;
+        }
+
+        /* --- BACKGROUND FX --- */
+        .grid-bg {
+            position: fixed;
+            inset: 0;
+            z-index: -1;
+            background-image: linear-gradient(var(--border) 1px, transparent 1px),
+                linear-gradient(90deg, var(--border) 1px, transparent 1px);
+            background-size: 40px 40px;
+            opacity: 0.3;
+            -webkit-mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+            mask-image: radial-gradient(circle at center, black 40%, transparent 100%);
+            pointer-events: none;
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            height: 60px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+            background: rgba(9, 9, 11, 0.7);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+            z-index: 50;
+        }
+
+        .brand {
+            font-weight: 800;
+            font-size: 1.25rem;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .brand-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            overflow: hidden;
+            box-shadow: 0 0 15px rgba(139, 92, 246, 0.3);
+            flex: 0 0 auto;
+        }
+        .brand-icon img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        /* --- WORKSPACE (Landing) --- */
+        #workspace-view {
+            flex: 1;
+            display: flex;
+            flex-wrap: wrap;
+            padding: clamp(20px, 4vw, 40px);
+            gap: clamp(20px, 4vw, 40px);
+            max-width: 1500px;
+            margin: 0 auto;
+            width: 100%;
+            align-items: flex-start;
+            justify-content: center;
+        }
+
+        .editor-card {
+            flex: 1.4 1 520px;
+            min-height: clamp(460px, 55vh, 680px);
+            max-width: 960px;
+            background: radial-gradient(1200px circle at 15% -20%, rgba(139, 92, 246, 0.25), transparent 45%),
+                        rgba(18, 18, 21, 0.55);
+            -webkit-backdrop-filter: blur(28px);
+            backdrop-filter: blur(28px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-top: 1px solid rgba(255, 255, 255, 0.14);
+            border-radius: 26px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 35px 80px -20px rgba(0, 0, 0, 0.7),
+                        inset 0 1px 0 rgba(255, 255, 255, 0.15),
+                        0 0 80px rgba(139, 92, 246, 0.12);
+            position: relative;
+            animation: fadeInUp 0.8s ease-out 0.2s backwards;
+        }
+
+        .editor-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.06), transparent 40%);
+            pointer-events: none;
+        }
+
+        .card-tabs {
+            display: flex;
+            border-bottom: 1px solid var(--border);
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .tab {
+            padding: 12px 24px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-muted);
+            cursor: pointer;
+            border-right: none;
+            transition: all 0.2s ease;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid transparent;
+            position: relative;
+        }
+
+        .tab:hover {
+            color: var(--text-main);
+            background: rgba(255, 255, 255, 0.03);
+        }
+
+        .tab.active {
+            color: var(--primary);
+            border-bottom: 2px solid var(--primary);
+            background: linear-gradient(to bottom, transparent, rgba(139, 92, 246, 0.05));
+            text-shadow: 0 0 20px rgba(139, 92, 246, 0.3);
+        }
+
+        .code-container {
+            flex: 1;
+            position: relative;
+            display: none;
+            min-height: 0;
+            overflow: hidden;
+            padding-bottom: 0;
+        }
+
+        .code-container.active {
+            display: flex;
+            flex-direction: column;
+        }
+
+        textarea {
+            flex: 1;
+            width: 100%;
+            background: transparent;
+            border: none;
+            padding: 20px;
+            font-family: 'Fira Code', monospace;
+            font-size: 14px;
+            color: #d4d4d8;
+            resize: none;
+            line-height: 1.6;
+            min-height: 0;
+        }
+
+        /* BOTTOM LAUNCH BAR */
+        .editor-action-bar {
+            position: relative;
+            bottom: auto;
+            left: auto;
+            width: 100%;
+            height: 70px;
+            background: rgba(9, 9, 11, 0.8);
+            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(12px);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 24px;
+            flex-shrink: 0;
+        }
+
+        .status-text {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+        }
+
+        .launch-btn-primary {
+            background: var(--text-main);
+            color: black;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.2s;
+        }
+
+        .launch-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 255, 255, 0.2);
+        }
+
+        /* UPLOAD OVERLAY */
+        .upload-overlay {
+            width: 100%;
+            height: 100%;
+            border: 2px dashed var(--border);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: 0.2s;
+            text-align: center;
+            gap: 10px;
+        }
+
+        .upload-overlay:hover {
+            border-color: var(--primary);
+            background: rgba(139, 92, 246, 0.08);
+        }
+
+        /* SIDEBAR INFO */
+        .info-panel {
+            width: clamp(280px, 32vw, 380px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: clamp(18px, 3vw, 28px);
+            flex: 1 1 320px;
+        }
+
+        .hero-title {
+            font-family: 'Outfit', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -1px;
+            background: linear-gradient(135deg, #e4e4e7 0%, #a5b4fc 100%);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px;
+            animation: fadeInUp 0.8s ease-out backwards;
+        }
+
+        .hero-desc {
+            color: var(--text-muted);
+            line-height: 1.7;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+        }
+
+        .step-list {
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+            margin-top: 12px;
+        }
+
+        .step-item {
+            display: flex;
+            gap: 14px;
+            align-items: flex-start;
+        }
+
+        .step-num {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.3), rgba(139, 92, 246, 0.1));
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 13px;
+            font-weight: 700;
+            color: #a78bfa;
+            flex-shrink: 0;
+        }
+
+        .step-text h4 {
+            color: var(--text-main);
+            font-size: 0.95rem;
+            margin-bottom: 6px;
+            font-weight: 600;
+        }
+
+        .step-text p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+
+        /* --- PREVIEW MODE --- */
+        #preview-view {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: #fff;
+            z-index: 100;
+        }
+
+        /* EXIT CONFIRMATION MODAL */
+        .confirm-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 10001;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            -webkit-backdrop-filter: blur(5px);
+            backdrop-filter: blur(5px);
+        }
+
+        .confirm-modal {
+            background: var(--bg-panel);
+            border: 1px solid var(--border);
+            padding: 30px;
+            border-radius: 16px;
+            width: 400px;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+            max-width: 92vw;
+        }
+
+        .confirm-modal h3 {
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .confirm-modal p {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 25px;
+            line-height: 1.5;
+        }
+
+        .confirm-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        @media (max-width: 600px) {
+            .confirm-modal { width: 92vw; padding: 20px; }
+            .confirm-actions { flex-direction: column; }
+        }
+
+        .btn-cancel {
+            background: rgba(139, 92, 246, 0.22);
+            border: 1px solid rgba(139, 92, 246, 0.45);
+            color: var(--text-main);
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: transform 0.15s ease, background 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .btn-cancel:hover {
+            background: rgba(139, 92, 246, 0.35);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+            transform: translateY(-1px);
+        }
+
+        .btn-confirm {
+            background: linear-gradient(135deg, #ef4444 0%, #f97316 100%);
+            border: 1px solid rgba(239, 68, 68, 0.6);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 700;
+            box-shadow: 0 10px 24px rgba(239, 68, 68, 0.35);
+            transition: transform 0.15s ease, filter 0.15s ease, box-shadow 0.15s ease;
+        }
+
+        .btn-confirm:hover {
+            filter: brightness(1.08);
+            box-shadow: 0 12px 28px rgba(239, 68, 68, 0.5);
+            transform: translateY(-1px);
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* --- RESPONSIVE MOBILE LAYOUT --- */
+        @media (max-width: 1200px) {
+            #workspace-view {
+                align-items: stretch;
+            }
+            .info-panel {
+                order: 1;
+            }
+            .editor-card {
+                order: 2;
+            }
+        }
+
+        @media (min-width: 1600px) {
+            #workspace-view {
+                max-width: 1700px;
+            }
+            .hero-title {
+                font-size: 3.1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                min-height: 100vh;
+                display: flex;
+                flex-direction: column;
+                overflow: auto;
+            }
+
+            nav {
+                padding: 0 16px;
+                height: 50px;
+                flex-shrink: 0;
+            }
+
+            .brand {
+                font-size: 1.1rem;
+            }
+
+            #workspace-view {
+                flex-direction: column;
+                padding: 16px;
+                gap: 16px;
+                align-items: stretch;
+                overflow-y: auto;
+                min-height: 0;
+            }
+
+            .info-panel {
+                width: 100%;
+                flex-shrink: 0;
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .editor-card {
+                min-height: 400px;
+                flex: 1;
+                width: 100%;
+                min-height: 0;
+            }
+
+            #preview-view {
+                position: fixed;
+                z-index: 100;
+            }
+
+            .tab {
+                padding: 12px 16px;
+                font-size: 0.85rem;
+            }
+
+            .editor-action-bar {
+                padding: 0 16px;
+                height: 60px;
+            }
+
+            .forge-dock {
+                width: 90%;
+                left: 5% !important;
+                right: auto !important;
+                top: 10px !important;
+            }
+
+            .forge-modal {
+                width: 90%;
+            }
+
+            .landing-footer {
+                flex-shrink: 0;
+                padding: 12px 16px;
+            }
+
+            .upload-overlay {
+                padding: clamp(12px, 2vw, 16px);
+                border-radius: 10px;
+            }
+
+            .upload-icon {
+                font-size: 1.5rem;
+                margin-bottom: 8px;
+            }
+        }
+
+        /* --- UTILITY CLASSES (Moved from inline styles) --- */
+        .nav-brand-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .version-badge {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .accent-purple {
+            color: #8b5cf6;
+        }
+
+        .hidden-file {
+            display: none;
+        }
+
+        .link-section {
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: transparent;
+            padding: 0;
+            overflow: auto;
+        }
+
+        .link-section.active {
+            display: flex;
+        }
+
+        .link-content-box {
+            text-align: center;
+            padding: clamp(20px, 4vw, 36px);
+            border: 2px dashed #333;
+            border-radius: 14px;
+            background: rgba(255, 255, 255, 0.02);
+            width: 90%;
+            max-width: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .link-content-box > * {
+            margin: 0;
+        }
+
+        .world-emoji {
+            font-size: clamp(2rem, 5vw, 2.8rem);
+            margin-bottom: 0;
+        }
+
+        .link-heading {
+            margin: 0;
+            font-weight: 600;
+            color: #fff;
+            font-size: clamp(0.95rem, 2vw, 1.1rem);
+        }
+
+        .link-text {
+            color: #888;
+            margin-bottom: 12px;
+            font-size: clamp(0.8rem, 1.8vw, 0.9rem);
+            line-height: 1.4;
+        }
+
+        .link-subtext {
+            opacity: 0.6;
+            font-size: clamp(0.75rem, 1.5vw, 0.8rem);
+        }
+
+        .url-input-wrapper {
+            position: relative;
+            margin-bottom: 12px;
+            width: 100%;
+        }
+
+        .url-input {
+            width: 100%;
+            max-width: 340px;
+            padding: 10px 13px;
+            background: #222;
+            border: 1px solid #444;
+            border-radius: 8px;
+            color: white;
+            font-family: sans-serif;
+            outline: none;
+            transition: 0.2s;
+            font-size: clamp(0.85rem, 1.5vw, 0.9rem);
+            box-sizing: border-box;
+        }
+
+        .url-input:focus {
+            border-color: #3b82f6;
+            background: #2a2a3a;
+        }
+
+        .fetch-btn {
+            background: #3b82f6;
+            color: white;
+            padding: clamp(9px, 2vw, 11px) clamp(18px, 3vw, 28px);
+            border-radius: 24px;
+            cursor: pointer;
+            font-weight: 600;
+            border: none;
+            font-size: clamp(0.8rem, 1.5vw, 0.9rem);
+            display: inline-block;
+            transition: 0.2s;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+            margin-top: 6px;
+        }
+
+        .fetch-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+        }
+
+        .fetch-status {
+            margin-top: 12px;
+            font-size: clamp(0.75rem, 1.5vw, 0.8rem);
+            color: #666;
+            height: auto;
+            min-height: 1.2em;
+        }
+
+        /* --- LANDING FOOTER --- */
+        .landing-footer {
+            width: 100%;
+            padding: clamp(16px, 3vw, 28px) clamp(20px, 6vw, 60px);
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            background: linear-gradient(180deg, rgba(10, 10, 14, 0.2), rgba(10, 10, 14, 0.6));
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        .landing-footer .footer-left {
+            font-size: 0.85rem;
+        }
+
+        .landing-footer .footer-right {
+            font-size: 0.85rem;
+            color: #c4b5fd;
+            text-shadow: 0 0 20px rgba(139, 92, 246, 0.35);
+        }
+
+        /* Note: user-select has broad browser support; -webkit prefix for Safari compatibility */
+        @media (max-width: 600px) {
+            .landing-footer {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+
+        .rocket-emoji {
+            font-size: 1.2em;
+        }
+
+        .brand-link {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+            color: inherit;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WTNL6N9F"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    <div class="grid-bg"></div>
+    <!-- v16: AURORA FX -->
+    <div class="aurora-blob blob-1"></div>
+    <div class="aurora-blob blob-2"></div>
+    <div class="aurora-blob blob-3"></div>
+
+    <nav>
+        <div class="nav-brand-wrapper">
+            <h1 class="brand">
+                <span class="brand-icon">
+                    <img src="https://i.ibb.co/HpK1fTcp/Gemini-Generated-Image-l70llnl70llnl70l.webp" alt="UIForge Logo">
+                </span>
+                <span>UIForge Ultimate</span>
+            </h1>
+            <div class="version-badge">v15.0 Creative</div>
+        </div>
+    </nav>
+
+    <!-- VIEW 1: WORKSPACE -->
+    <div id="workspace-view">
+        <div class="info-panel">
+            <h1 class="hero-title">Absolute Precision<br><span class="accent-purple">for AI Web Gen.</span></h1>
+            <p class="hero-desc">
+                Stop wasting tokens on tiny layout tweaks. Fix it <b>Visually</b>. <br>
+                Change colors, styles, and structure instantly. Make it professional, fast, and fully responsive.
+            </p>
+
+            <div class="step-list">
+                <div class="step-item">
+                    <div class="step-num">1</div>
+                    <div class="step-text">
+                        <h4>Save AI Tokens</h4>
+                        <p>Don't re-prompt for 10px padding. Just drag it.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-num">2</div>
+                    <div class="step-text">
+                        <h4>Total Style Control</h4>
+                        <p>Refine colors, fonts, and responsiveness visually.</p>
+                    </div>
+                </div>
+                <div class="step-item">
+                    <div class="step-num">3</div>
+                    <div class="step-text">
+                        <h4>Pro & Fast Output</h4>
+                        <p>Export clean, semantic code that loads instantly.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="editor-card">
+            <div class="card-tabs">
+                <button class="tab active" onclick="setTab('html')">HTML</button>
+                <button class="tab" onclick="setTab('css')">CSS</button>
+                <button class="tab" onclick="setTab('js')">JS</button>
+                <button class="tab" onclick="setTab('upload')">Upload</button>
+                <button class="tab" onclick="setTab('link')">Link</button>
+            </div>
+
+            <div id="area-html" class="code-container active">
+                <textarea id="in-html" placeholder="<!-- Paste HTML Body Here -->
+<div class='hero'>
+    <h1>Design is Intelligence made visible.</h1>
+    <p>Click and drag me to rearrange!</p>
+    <button>Get Started</button>
+</div>"></textarea>
+            </div>
+
+            <div id="area-css" class="code-container">
+                <textarea id="in-css" placeholder="/* Paste CSS Here */
+body {
+    display: flex; align-items: center; justify-content: center;
+    height: 100vh; background: #f3f4f6; font-family: sans-serif;
+}
+.hero {
+    text-align: center; background: white; padding: 60px;
+    border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.1);
+}
+h1 { color: #111; margin-bottom: 20px; }
+button {
+    background: #000; color: #fff; padding: 12px 24px;
+    border-radius: 8px; border: none; cursor: pointer;
+}"></textarea>
+            </div>
+
+            <div id="area-js" class="code-container">
+                <textarea id="in-js" placeholder="// Optional JavaScript
+console.log('Ready to forge.');"></textarea>
+            </div>
+
+            <div id="area-upload" class="code-container">
+                <div class="upload-overlay" onclick="document.getElementById('file-up').click()">
+                    <div class="upload-icon">📂</div>
+                    <div class="upload-title">Click to upload</div>
+                    <div class="upload-hint">Supports .html or .zip</div>
+                    <input type="file" id="file-up" accept=".html,.zip" class="hidden-file" onchange="loadFile(this)">
+                </div>
+            </div>
+
+            <!-- LINK TAB -->
+            <div id="area-link" class="code-container link-section">
+                <div class="link-content-box">
+                    <div class="world-emoji">🌍</div>
+                    <h3 class="link-heading">Import External Website</h3>
+                    <p class="link-text">
+                        Enter a URL to load it for visual refactoring.<br>
+                        <small class="link-subtext">(Works best with static sites)</small>
+                    </p>
+
+                    <div class="url-input-wrapper">
+                        <input type="text" id="url-input" placeholder="https://example.com" class="url-input">
+                    </div>
+
+                    <div id="btn-fetch" onclick="loadFromUrl()" class="fetch-btn">
+                        🚀 Load Website
+                    </div>
+
+                    <div id="fetch-status" class="fetch-status"></div>
+                </div>
+            </div>
+
+            <!-- CLEAR LAUNCH ACTION BAR -->
+            <div class="editor-action-bar">
+                <div class="status-text">Ready to visualize.</div>
+                <button class="launch-btn-primary" onclick="launchApp()">
+                    <span>Launch Studio</span>
+                    <span class="rocket-emoji">🚀</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="landing-footer" aria-label="Site footer">
+        <div class="footer-left">© 2026 UIForge Ultimate. All rights reserved.</div>
+        <div class="footer-right">Unauthorized copying, scraping, or redistribution is prohibited.</div>
+    </footer>
+
+    <!-- VIEW 2: PREVIEW -->
+    <div id="preview-view">
+        <div class="confirm-overlay" id="confirm-modal">
+            <div class="confirm-modal">
+                <h3>⚠️ Unsaved Changes?</h3>
+                <p>Have you exported your AI Prompt? If you exit now, your visual tweaks will be lost. Make sure to copy
+                    the prompt from the tool first.</p>
+                <div class="confirm-actions">
+                    <button class="btn-cancel" onclick="closeConfirm()">Go Back</button>
+                    <button class="btn-confirm" onclick="realExit()">Exit Anyway</button>
+                </div>
+            </div>
+        </div>
+
+        <iframe id="sandbox"></iframe>
+    </div>
+
+    <!-- 
+      =======================================================================
+      THE BLUEPRINT: This script is injected into the iframe.
+      =======================================================================
+    -->
+    <script id="blueprint-script" type="text/plain">
+(function() {
+    /* UI FORGE ARCHITECT ENGINE - v15.0 Creative */
+    
+    // 1. STATE & HISTORY
+    const State = {
+        active: null,
+        dragging: false,
+        textEditing: false, 
+        startX: 0, startY: 0,
+        edits: new Map(),
+        undoStack: [],          // Global Undo Stack
+        redoStack: [],          // Global Redo Stack
+        toolActive: false,
+        // DOCK DRAGGING
+        dockDrag: false, 
+        dockOffsetX: 0, dockOffsetY: 0,
+        // CHANGE TRACKING (v16.0 Accuracy)
+        initialSnapshots: new Map(),
+        changeLog: new Map(),
+        // DRAG SMOOTHING
+        dragRaf: 0,
+        lastMoveX: 0,
+        lastMoveY: 0
+    };
+
+    const MAX_HISTORY = 50; // History limit to prevent memory leaks
+
+    // 2. INJECT TOOLBAR STYLES
+    const style = document.createElement('style');
+    style.innerHTML = `
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap');
+        
+        /* Font Fallbacks */
+        body, * { font-family: 'Inter', 'Segoe UI', system-ui, -apple-system, sans-serif; }
+        
+        /* 1. THE LAUNCHER BUTTON */
+        .forge-launcher {
+            position: fixed; bottom: 20px; right: 20px;
+            background: #8b5cf6; color: white;
+            padding: 12px 24px; border-radius: 30px;
+            font-family: 'Inter', sans-serif; font-weight: 700;
+            box-shadow: 0 10px 25px rgba(139, 92, 246, 0.4);
+            cursor: pointer; z-index: 999998;
+            transition: transform 0.2s; border: 2px solid rgba(255,255,255,0.2);
+        }
+        .forge-launcher:hover { transform: scale(1.05); }
+
+        /* 2. THE MAIN DOCK (Compact v15.2) */
+        .forge-dock {
+            position: fixed; top: 20px; right: 20px;
+            background: rgba(15, 15, 20, 0.95); 
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 6px; /* Reduced from 10px */
+            width: 140px; /* Reduced from 180px */
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+            z-index: 999999;
+            font-family: 'Inter', sans-serif;
+            display: none; 
+            flex-direction: column; gap: 4px; /* Reduced from 8px */
+            backdrop-filter: blur(16px); /* Increased blur */
+            user-select: none; /* v15.4 FIX: Prevent text selection while dragging dock */
+            touch-action: none; /* Mobile fix: Prevent page scroll while dragging dock */
+        }
+        .forge-dock.active { display: flex; animation: slideIn 0.2s ease-out; }
+        @keyframes slideIn { from { opacity:0; transform:translateY(-10px); } to { opacity:1; transform:translateY(0); } }
+
+        .dock-header {
+            display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 6px;
+            margin-bottom: 3px;
+            cursor: move; /* Indicates draggable */
+        }
+        .dock-title { color: white; font-weight: 700; font-size: 12px; pointer-events: none; }
+        .dock-close { color: #ef4444; cursor: pointer; font-weight: bold; font-size: 10px; background: rgba(239, 68, 68, 0.1); padding: 2px 6px; border-radius: 4px; }
+
+        /* DOCK SECTIONS (Grid Layout v15.2) */
+        .dock-section { display: flex; flex-direction: column; gap: 3px; }
+        .section-label { font-size: 8px; color: #666; text-transform: uppercase; font-weight: 700; letter-spacing: 0.3px; pointer-events: none; margin-bottom: 1px; }
+
+        /* GRID ROW for tools */
+        .tool-row { 
+            display: grid; 
+            grid-template-columns: 1fr 1fr; 
+            gap: 3px; 
+        }
+        
+        .tool-btn {
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.05);
+            color: #ccc; padding: 4px; /* Reduced from 6px */
+            border-radius: 5px;
+            cursor: pointer; font-size: 9px; /* Reduced from 11px */
+            font-weight: 500;
+            display: flex; align-items: center; justify-content: center; gap: 2px;
+            transition: 0.1s;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+        .tool-btn:hover { background: rgba(255,255,255,0.1); color: white; }
+        .tool-btn.primary { background: rgba(139, 92, 246, 0.15); color: #a78bfa; border-color: rgba(139, 92, 246, 0.3); }
+        .tool-btn.primary:hover { background: rgba(139, 92, 246, 0.3); }
+        .tool-btn.danger { color: #fca5a5; }
+        .tool-btn.danger:hover { background: rgba(239, 68, 68, 0.2); }
+
+        /* SELECTION HIGHLIGHTS */
+        .forge-selected {
+            outline: 2px solid #8b5cf6 !important;
+            cursor: grab !important;
+            user-select: none;
+            touch-action: none; /* Mobile fix: Prevent page scroll while dragging elements */
+        }
+        .forge-text-edit {
+            outline: 2px dashed #facc15 !important;
+            cursor: text !important;
+            user-select: text !important;
+            cursor: auto !important;
+        }
+
+        /* Canvas should not scroll during touch dragging */
+        #canvas-root { touch-action: none; }
+
+        /* MODALS */
+        .forge-modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 1000000; display: none; }
+        .forge-modal {
+            position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%);
+            width: 500px; background: #18181b; color: white;
+            border: 1px solid #333; border-radius: 16px; padding: 24px; 
+            z-index: 1000001; display: none; font-family: 'Inter', sans-serif;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.5);
+            max-width: 92vw;
+            max-height: 85vh;
+            overflow: auto;
+        }
+        .forge-modal.open { display: block; }
+        
+        .forge-textarea {
+            width: 100%; height: 300px; background: #000; color: #4ade80;
+            border: 1px solid #333; border-radius: 8px; padding: 10px;
+            font-family: monospace; font-size: 11px; resize: none; margin-top: 10px;
+            max-height: 60vh;
+        }
+
+        @media (max-width: 600px) {
+            .forge-modal { width: 92vw; padding: 16px; }
+            .forge-textarea { height: 45vh; font-size: 10px; }
+        }
+    `;
+    document.head.appendChild(style);
+
+    // 3. CREATE UI ELEMENTS
+    
+    // A. Launcher
+    const launcher = document.createElement('div');
+    launcher.className = 'forge-launcher';
+    launcher.innerHTML = '🚀 Launch Tools';
+    document.body.appendChild(launcher);
+
+    // B. The Dock
+    const dock = document.createElement('div');
+    dock.className = 'forge-dock';
+    dock.innerHTML = `
+        <div class="dock-header" id="f-dock-header">
+            <div class="dock-title">UI Architect</div>
+            <div class="dock-close" id="f-dock-hide">Close</div>
+        </div>
+        
+        <div class="dock-section">
+            <div class="section-label">Transform</div>
+            <div class="tool-row">
+                <div class="tool-btn" id="f-rot-l" role="button" tabindex="0">↺ -15°</div>
+                <div class="tool-btn" id="f-rot-r" role="button" tabindex="0">↻ +15°</div>
+            </div>
+            <div class="tool-row">
+                <div class="tool-btn" id="f-scale-up" role="button" tabindex="0">Scale +</div>
+                <div class="tool-btn" id="f-scale-down" role="button" tabindex="0">Scale -</div>
+            </div>
+            <div class="tool-row">
+                <div class="tool-btn" id="f-zindex-up" role="button" tabindex="0">Z-Index +</div>
+                <div class="tool-btn" id="f-zindex-down" role="button" tabindex="0">Z-Index −</div>
+            </div>
+        </div>
+
+        <div class="dock-section">
+            <div class="section-label">Edit</div>
+            <div class="tool-row">
+                <div class="tool-btn" id="f-text" role="button" tabindex="0">T Text</div>
+            </div>
+            <div class="tool-row">
+                <div class="tool-btn" style="position:relative;">
+                    <div id="swatch-bg" style="width:12px; height:12px; border-radius:50%; border:1px solid rgba(255,255,255,0.3); background:transparent; margin-right:4px;"></div>
+                    Bg
+                    <input type="color" id="f-bg-input" aria-label="Background Color Picker" title="Change background color" style="position:absolute; left:0; top:0; width:100%; height:100%; opacity:0; cursor:pointer;" disabled>
+                </div>
+                <div class="tool-btn" style="position:relative;">
+                    <div id="swatch-txt" style="width:12px; height:12px; border-radius:50%; border:1px solid rgba(255,255,255,0.3); background:transparent; margin-right:4px;"></div>
+                    Txt
+                    <input type="color" id="f-color-input" aria-label="Text Color Picker" title="Change text color" style="position:absolute; left:0; top:0; width:100%; height:100%; opacity:0; cursor:pointer;" disabled>
+                </div>
+            </div>
+        </div>
+
+        <div class="dock-section">
+            <div class="section-label">History (Selected)</div>
+            <div class="tool-row">
+                <div class="tool-btn" id="f-undo" role="button" tabindex="0" onclick="window.handleUndo(event)">↩ Undo</div>
+                <div class="tool-btn" id="f-redo" role="button" tabindex="0" onclick="window.handleRedo(event)">↪ Redo</div>
+            </div>
+        </div>
+
+        <div style="height:1px; background:rgba(255,255,255,0.1); margin:5px 0;"></div>
+
+        <div class="dock-section">
+            <div class="tool-btn primary" id="f-export" role="button" tabindex="0">✨ AI Prompt</div>
+            <div class="tool-btn danger" id="f-exit-studio" role="button" tabindex="0">✕ Exit</div>
+        </div>
+
+        <div style="height:1px; background:rgba(255,255,255,0.1); margin:8px 0;"></div>
+        <div class="dock-section" style="margin-top:8px;">
+            <div class="section-label">Keyboard Shortcuts</div>
+            <div style="font-size:10px; color:#888; line-height:1.6; padding:8px; background:rgba(255,255,255,0.03); border-radius:6px;">
+                <div>⬆️ <strong>Shift + Scroll</strong> = Scale</div>
+                <div>🔄 <strong>Alt + Scroll</strong> = Rotate</div>
+                <div>📋 <strong>Esc</strong> = Close export</div>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(dock);
+
+    // Make dock buttons keyboard accessible
+    setTimeout(() => {
+        document.querySelectorAll('.tool-btn').forEach(btn => {
+            btn.addEventListener('keypress', (e) => {
+                if(e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    btn.click();
+                }
+            });
+        });
+    }, 100);
+
+            // Export Modal
+            const exportModal = document.createElement('div');
+            exportModal.className = 'forge-modal';
+            exportModal.innerHTML = `
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+                    <h3 style="margin:0;">AI Developer Report</h3>
+                    <div style="cursor:pointer; color:#71717a; font-weight:bold; padding:4px 8px; border-radius:4px; background:rgba(255,255,255,0.05);" onclick="this.closest('.forge-modal').classList.remove('open')">✕</div>
+                </div>
+                <p style="font-size:13px; color:#aaa;">Copy this report. It contains pinpoint instructions for your AI coder.</p>
+                <textarea class="forge-textarea"></textarea>
+                <div class="tool-btn primary" style="margin-top:15px; text-align:center;" onclick="
+                    const txt = this.parentElement.querySelector('textarea');
+                    txt.select();
+                    document.execCommand('copy');
+                    this.innerText = '✨ Copied!';
+                    setTimeout(() => { 
+                        this.innerText = 'Copy to Clipboard'; 
+                        this.parentElement.classList.remove('open');
+                    }, 1000);
+                ">Copy to Clipboard</div>
+            `;
+            document.body.appendChild(exportModal);
+            
+            // Add keyboard close functionality
+            document.addEventListener('keydown', (e) => {
+                if(e.key === 'Escape') {
+                    exportModal.classList.remove('open');
+                }
+            });
+
+            // 4. UI LOGIC (Open/Close)
+            launcher.onclick = () => {
+                dock.classList.add('active');
+                launcher.style.display = 'none';
+                State.toolActive = true;
+            };
+            document.getElementById('f-dock-hide').onclick = () => {
+                dock.classList.remove('active');
+                launcher.style.display = 'block';
+                State.toolActive = false;
+            };
+            document.getElementById('f-dock-hide').addEventListener('pointerdown', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                dock.classList.remove('active');
+                launcher.style.display = 'block';
+                State.toolActive = false;
+            });
+            document.getElementById('f-dock-hide').addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                dock.classList.remove('active');
+                launcher.style.display = 'block';
+                State.toolActive = false;
+            }, { passive: false });
+            document.getElementById('f-exit-studio').onclick = () => {
+                window.parent.exitApp();
+            };
+
+            // --- DOCK DRAGGING (Mouse + Touch) ---
+            const dockHeader = document.getElementById('f-dock-header');
+            const getPoint = (evt) => {
+                if(evt.touches && evt.touches.length) return evt.touches[0];
+                if(evt.changedTouches && evt.changedTouches.length) return evt.changedTouches[0];
+                return evt;
+            };
+            dockHeader.onmousedown = (e) => {
+                e.preventDefault(); // v15.4 FIX: Prevent text selection while dragging
+                const p = getPoint(e);
+                State.dockDrag = true;
+                State.dockOffsetX = p.clientX - dock.getBoundingClientRect().left;
+                State.dockOffsetY = p.clientY - dock.getBoundingClientRect().top;
+                e.stopPropagation(); // prevent selecting elements behind
+            };
+            dockHeader.ontouchstart = (e) => {
+                e.preventDefault();
+                const p = getPoint(e);
+                State.dockDrag = true;
+                State.dockOffsetX = p.clientX - dock.getBoundingClientRect().left;
+                State.dockOffsetY = p.clientY - dock.getBoundingClientRect().top;
+                e.stopPropagation();
+            };
+
+            // 5. SAFETY SHIELD: DISABLE LINKS
+            document.addEventListener('click', (e) => {
+                if(!State.toolActive) return; // Only block if tools are open
+                // Allow UI interactions
+                if(e.target.closest('.forge-dock') || e.target.closest('.forge-launcher') || e.target.closest('.forge-modal')) return;
+                
+                // Block all other clicks (links, buttons, submits) inside website
+                e.preventDefault();
+                e.stopPropagation();
+                
+                // Handle selection instead (normalize target)
+                const target = getSelectableElement(e.target);
+                if(target) selectElement(target);
+            }, true); // Capture phase
+            
+            // NEW: Helper to sync inputs
+            function updateColorInputs(el) {
+                const bgInput = document.getElementById('f-bg-input');
+                const txtInput = document.getElementById('f-color-input');
+                
+                bgInput.disabled = false;
+                txtInput.disabled = false;
+                
+                // bgInput.parentElement.classList.remove('disabled'); // Optional styling
+                
+                const style = window.getComputedStyle(el);
+                bgInput.value = rgbToHex(style.backgroundColor);
+                txtInput.value = rgbToHex(style.color);
+            }
+
+            // 6. LOGIC HELPERS
+            // Prevent native drag (fixes link/button glitches) - Capture Phase
+            window.addEventListener('dragstart', (e) => {
+                e.preventDefault();
+            }, true);
+
+            function getSelectableElement(target) {
+                if(!target) return null;
+                let el = target.nodeType === 3 ? target.parentElement : target; // text node -> element
+                if(!el) return null;
+
+                // Ignore forge UI elements
+                if(el.closest('.forge-dock') || el.closest('.forge-launcher') || el.closest('.forge-modal')) return null;
+
+                const root = document.getElementById('canvas-root');
+                if(!root) return null;
+
+                if(el === document.body || el === document.documentElement || el === root) return null;
+                if(!root.contains(el)) return null;
+
+                return el;
+            }
+
+            function selectElement(el) {
+                if(!el) return;
+                if(el === document.body || el === document.documentElement) return;
+                if(el.id === 'canvas-root') return;
+
+                if(State.active) {
+                     State.active.classList.remove('forge-selected');
+                     // Blur if text editing
+                     if(State.textEditing && State.active !== el) finishTextEdit();
+                }
+                
+                State.active = el;
+                State.active.classList.add('forge-selected');
+                initElement(el);
+
+                updateColorInputs(el);
+                updateHistoryUI();
+            }
+
+            function updateHistoryUI() {
+                const undoBtn = document.getElementById('f-undo');
+                const redoBtn = document.getElementById('f-redo');
+                if(!undoBtn || !redoBtn) return;
+                
+                let u = State.undoStack.length;
+                let r = State.redoStack.length;
+                
+                // TARGETED COUNT logic (v15.1)
+                if(State.active) {
+                    const sel = getSelector(State.active);
+                    u = State.undoStack.filter(a => a.selector === sel).length;
+                    r = State.redoStack.filter(a => a.selector === sel).length;
+                }
+                
+                undoBtn.innerText = `↩ Undo (${u})`;
+                redoBtn.innerText = `↪ Redo (${r})`;
+                
+                undoBtn.style.opacity = u > 0 ? 1 : 0.5;
+                redoBtn.style.opacity = r > 0 ? 1 : 0.5;
+                undoBtn.style.cursor = u > 0 ? 'pointer' : 'not-allowed';
+                redoBtn.style.cursor = r > 0 ? 'pointer' : 'not-allowed';
+            }
+
+            function ensureExportId(el) {
+                if(!el) return;
+                if(!el.id) {
+                    el.id = 'gen-' + Math.random().toString(36).substr(2, 9);
+                }
+                if(!el.dataset.exportId) {
+                    el.dataset.exportId = el.id;
+                }
+            }
+
+            function initElement(el) {
+                // v15.20 FIX: AUTO-ID GENERATION
+                // Ensure every element has a stable ID for the Undo System
+                ensureExportId(el);
+
+                // FIXED: Guard against duplicate initialization
+                if(State.edits.has(el)) return;
+                
+                let x = 0, y = 0, scale = 1, rotate = 0;
+                
+                const comp = window.getComputedStyle(el);
+                const mat = comp.transform;
+                
+                if(mat !== 'none') {
+                    try {
+                        // FIXED: Safe parsing with regex for stability
+                        const matrixRegex = /matrix(?:3d)?\(([^)]+)\)/;
+                        const match = mat.match(matrixRegex);
+                        
+                        if(match) {
+                            const values = match[1].split(',').map(v => parseFloat(v.trim()));
+                            // We only care about 2D parts for now
+                            if(values.length >= 6) {
+                                const a = values[0];
+                                const b = values[1];
+                                x = values[4]; // tx
+                                y = values[5]; // ty
+                                scale = Math.sqrt(a * a + b * b);
+                            }
+                        }
+                    } catch(e) {
+                        console.error('[Init] Transform parse error:', e);
+                    }
+                }
+                
+                // FIXED: Capture existing inline styles so we don't wipe them on Undo
+                State.edits.set(el, { 
+                    x, y, scale, rotate, 
+                    bg: el.style.backgroundColor || '', 
+                    color: el.style.color || '', 
+                    html: el.innerHTML, 
+                    href: el.getAttribute('href'),
+                    zIndex: parseInt(el.style.zIndex) || 0
+                });
+
+                // v16.0: Capture initial snapshot for accuracy manifests
+                if(!State.initialSnapshots.has(el)) {
+                    State.initialSnapshots.set(el, JSON.parse(JSON.stringify(State.edits.get(el))));
+                }
+            }
+            
+            function getSnapshot(el) {
+                if(!el) return null;
+                // Ensure element is tracked
+                if(!State.edits.has(el)) initElement(el);
+                
+                const s = State.edits.get(el);
+                
+                // ALWAYS sync with current DOM (not just if undefined)
+                s.html = el.innerHTML;
+                s.href = el.getAttribute('href'); 
+                
+                // Return deep copy to prevent mutations (Critical Fix)
+                return JSON.parse(JSON.stringify(s));
+            }
+
+            function applyState(el, s) {
+                if(!el) return;
+
+                // FIXED: Create NEW state object, never mutate the passed 's' directly
+                // This protects the history stack from being corrupted by live changes
+                const newState = {
+                    x: s.x,
+                    y: s.y,
+                    scale: s.scale,
+                    rotate: s.rotate,
+                    bg: s.bg || '',
+                    color: s.color || '',
+                    html: s.html,
+                    href: s.href,
+                    zIndex: s.zIndex || 0
+                };
+
+                State.edits.set(el, newState);
+                
+                el.style.transform = `translate3d(${newState.x}px, ${newState.y}px, 0) scale(${newState.scale}) rotate(${newState.rotate}deg)`;
+                el.style.backgroundColor = newState.bg || '';
+                el.style.color = newState.color || '';
+                el.style.zIndex = newState.zIndex;
+                
+                if(newState.html !== undefined && newState.html !== null) el.innerHTML = newState.html;
+                if(newState.href !== undefined) {
+                     if(newState.href === null) el.removeAttribute('href');
+                     else el.setAttribute('href', newState.href);
+                }
+                
+                updateColorInputs(el);
+            }
+
+            function recordAction(el, type, before, after) {
+                if(!el) return;
+                if(JSON.stringify(before) === JSON.stringify(after)) return;
+                
+                // FIXED (v15.0): Store Selector String, NOT direct element reference.
+                // This prevents crashes if the DOM is rebuilt or references become stale.
+                const action = { 
+                    selector: getSelector(el), // Store string path
+                    type, 
+                    before: JSON.parse(JSON.stringify(before)), 
+                    after: JSON.parse(JSON.stringify(after)),
+                    timestamp: Date.now()
+                };
+
+                // v16.0: Change Log (for AI accuracy manifest)
+                const sel = action.selector;
+                const existing = State.changeLog.get(sel);
+                if(!existing) {
+                    State.changeLog.set(sel, {
+                        selector: sel,
+                        exportId: el.dataset ? el.dataset.exportId : undefined,
+                        first: JSON.parse(JSON.stringify(before)),
+                        last: JSON.parse(JSON.stringify(after)),
+                        types: new Set([type])
+                    });
+                } else {
+                    existing.last = JSON.parse(JSON.stringify(after));
+                    existing.types.add(type);
+                }
+
+                State.undoStack.push(action);
+                
+                State.redoStack = []; 
+                
+                if(State.undoStack.length > MAX_HISTORY) {
+                    State.undoStack.shift(); 
+                }
+                
+                updateHistoryUI();
+            }
+            
+            // 7. DRAG LOGIC (ELEMENTS + DOCK)
+            let dragStart = null;
+            let dragStartSnap = null; // Store initial snapshot for non-accumulative drag logic
+
+            const handlePointerDown = (e) => {
+                if(!State.toolActive) return;
+
+                // FIX: Force inputs to blur explicitly on ANY interaction outside them
+                // This ensures color/text changes are saved BEFORE a tool (like Undo) runs.
+                if(e.target.id !== 'f-bg-input' && e.target.id !== 'f-color-input') {
+                    const bgIn = document.getElementById('f-bg-input');
+                    const txtIn = document.getElementById('f-color-input');
+                    if(document.activeElement === bgIn) bgIn.blur();
+                    if(document.activeElement === txtIn) txtIn.blur();
+                }
+
+                // FIX: Check Text Edit Finish FIRST (before ignoring dock clicks)
+                if(State.textEditing) {
+                    // If clicking outside the active text element, finish editing
+                    if(e.target !== State.active) {
+                        finishTextEdit();
+                    } else {
+                        return; // Clicking inside the text: allowed
+                    }
+                }
+                
+                // DOCK DRAG HANDLING
+                if(State.dockDrag) return; 
+
+                if(e.target.closest('.forge-ui-element')) return; // Ignore internal UI
+                
+                // Just select, don't drag if clicking tools
+                if(e.target.closest('.forge-dock')) return;
+                // Fix: Prevent selecting/dragging the modal
+                if(e.target.closest('.forge-modal')) return;
+
+                // Mobile fix: prevent page scroll when touching canvas elements
+                if(e.type === 'touchstart' && e.cancelable) e.preventDefault();
+
+                // Select logic
+                // (Text check removed from here)
+
+                const target = getSelectableElement(e.target);
+
+                // If clicking background/root, clear selection
+                if(!target) {
+                    if(State.active) State.active.classList.remove('forge-selected');
+                    State.active = null;
+                    document.getElementById('f-bg-input').disabled = true;
+                    document.getElementById('f-color-input').disabled = true;
+                    updateHistoryUI();
+                    return;
+                }
+
+                if(State.active && target !== State.active) State.active.classList.remove('forge-selected');
+
+                // UNIFIED SELECTION LOGIC
+                selectElement(target);
+                
+                // Capture Clean State for Drag Origin
+                
+                // FIXED (v15.1): Force Sync State before Drag
+                // This fix ensures that even if 'Undo' changed the DOM 
+                // but didn't update the transform map perfectly, we re-read it.
+                initElement(State.active); 
+                
+                // Ensure snapshot has current HTML before drag starts
+                State.edits.get(State.active).html = State.active.innerHTML; 
+                
+                dragStart = getSnapshot(State.active);
+                dragStartSnap = JSON.parse(JSON.stringify(dragStart)); // Safe copy for calculation base
+                
+                State.dragging = true;
+                const p = getPoint(e);
+                State.startX = p.clientX;
+                State.startY = p.clientY;
+                State.lastMoveX = p.clientX;
+                State.lastMoveY = p.clientY;
+                // Hint GPU for smoother transforms
+                State.active.style.willChange = 'transform';
+                State.active.style.cursor = 'grabbing';
+            };
+            document.addEventListener('mousedown', handlePointerDown);
+            document.addEventListener('touchstart', handlePointerDown, { passive: false });
+
+            const handlePointerMove = (e) => {
+                // Mobile fix: prevent page scroll while dragging
+                if((State.dockDrag || State.dragging) && e.cancelable) e.preventDefault();
+                // DOCK DRAG
+                if(State.dockDrag) {
+                    const p = getPoint(e);
+                    dock.style.left = (p.clientX - State.dockOffsetX) + 'px';
+                    dock.style.top = (p.clientY - State.dockOffsetY) + 'px';
+                    dock.style.right = 'auto'; // Disable default right positioning
+                    return;
+                }
+
+                // ELEMENT DRAG
+                if(!State.dragging || !State.active || !dragStartSnap) return;
+                
+                const p = getPoint(e);
+                State.lastMoveX = p.clientX;
+                State.lastMoveY = p.clientY;
+
+                if(State.dragRaf) return;
+                State.dragRaf = requestAnimationFrame(() => {
+                    if(!State.dragging || !State.active || !dragStartSnap) {
+                        State.dragRaf = 0;
+                        return;
+                    }
+
+                    const dx = State.lastMoveX - State.startX;
+                    const dy = State.lastMoveY - State.startY;
+
+                    const d = State.edits.get(State.active);
+                    
+                    // FIXED: Calculate from Origin (dragStartSnap) instead of accumulating += dx
+                    // This solves the 'drifting' bug and accumulation errors.
+                    d.x = dragStartSnap.x + dx;
+                    d.y = dragStartSnap.y + dy;
+                    
+                    // Store viewport-relative values for responsive export
+                    const vw = window.innerWidth;
+                    const vh = window.innerHeight;
+                    d.xVw = (d.x / vw * 100).toFixed(3);
+                    d.yVh = (d.y / vh * 100).toFixed(3);
+                    
+                    State.active.style.transform = `translate3d(${d.x}px, ${d.y}px, 0) scale(${d.scale}) rotate(${d.rotate}deg)`;
+                    State.dragRaf = 0;
+                });
+            };
+            window.addEventListener('mousemove', handlePointerMove);
+            window.addEventListener('touchmove', handlePointerMove, { passive: false });
+
+            const handlePointerUp = () => {
+                if(State.dockDrag) {
+                    State.dockDrag = false;
+                    return;
+                }
+
+                if(State.dragging && State.active) {
+                    const dragEnd = getSnapshot(State.active);
+                    // Only record if actually moved
+                    recordAction(State.active, 'move', dragStart, dragEnd);
+                }
+                State.dragging = false;
+                dragStartSnap = null;
+                if(State.active) {
+                    State.active.style.willChange = '';
+                    State.active.style.cursor = '';
+                }
+                if(State.dragRaf) {
+                    cancelAnimationFrame(State.dragRaf);
+                    State.dragRaf = 0;
+                }
+            };
+            window.addEventListener('mouseup', handlePointerUp);
+            window.addEventListener('touchend', handlePointerUp);
+            window.addEventListener('touchcancel', handlePointerUp);
+
+            // 8. SHORTCUTS (Shift+Wheel Scale, Alt+Wheel Rotate)
+            window.addEventListener('wheel', (e) => {
+                if(!State.active) return;
+                
+                // Scaling
+                if(e.shiftKey) {
+                    e.preventDefault();
+                    const d = State.edits.get(State.active);
+                    const before = getSnapshot(State.active);
+                    const delta = e.deltaY > 0 ? -0.1 : 0.1;
+                    d.scale = Math.max(0.1, d.scale + delta);
+                    applyState(State.active, d);
+                    recordAction(State.active, 'scale', before, getSnapshot(State.active));
+                }
+                
+                // Rotating
+                if(e.altKey) {
+                    e.preventDefault();
+                    const d = State.edits.get(State.active);
+                    const before = getSnapshot(State.active);
+                    const delta = e.deltaY > 0 ? 15 : -15;
+                    d.rotate += delta;
+                    applyState(State.active, d);
+                    recordAction(State.active, 'rotate', before, getSnapshot(State.active));
+                }
+            }, { passive: false });
+
+            // 9. TOOL ACTIONS
+            // Rotation Buttons
+            const doRotate = (deg) => {
+                if(State.textEditing) finishTextEdit();
+                
+                if(!State.active) {
+                    alert('Select an element first');
+                    return;
+                }
+                const before = getSnapshot(State.active);
+                const d = State.edits.get(State.active);
+                d.rotate += deg;
+                applyState(State.active, d);
+                recordAction(State.active, 'rotate', before, getSnapshot(State.active));
+            };
+            document.getElementById('f-rot-l').onclick = () => doRotate(-15);
+            document.getElementById('f-rot-r').onclick = () => doRotate(15);
+
+            // Scale Buttons
+            const doScale = (val) => {
+                if(State.textEditing) finishTextEdit();
+                
+                if(!State.active) {
+                    alert('Select an element first');
+                    return;
+                }
+                const before = getSnapshot(State.active);
+                const d = State.edits.get(State.active);
+                d.scale = Math.max(0.1, d.scale + val); // Prevent negative scale
+                applyState(State.active, d);
+                recordAction(State.active, 'scale', before, getSnapshot(State.active));
+            };
+            document.getElementById('f-scale-up').onclick = () => doScale(0.1);
+            document.getElementById('f-scale-down').onclick = () => doScale(-0.1);
+
+            // Z-Index Control
+            function doZIndex(delta) {
+                if(!State.active) return;
+                const before = JSON.parse(JSON.stringify(getSnapshot(State.active)));
+                const d = State.edits.get(State.active);
+                d.zIndex = (d.zIndex || 0) + delta;
+                applyState(State.active, d);
+                recordAction(State.active, 'zindex', before, getSnapshot(State.active));
+            };
+            document.getElementById('f-zindex-up').onclick = () => doZIndex(1);
+            document.getElementById('f-zindex-down').onclick = () => doZIndex(-1);
+
+            // Text Edit
+            function finishTextEdit() {
+                if(!State.active) return;
+                if(!State.textEditing) return;
+                
+                State.active.contentEditable = false;
+                State.active.classList.remove('forge-text-edit');
+                State.textEditing = false;
+                
+                // Sync the edited HTML into state
+                State.edits.get(State.active).html = State.active.innerHTML;
+                
+                // Take snapshot AFTER editing (Deep Copy)
+                const after = JSON.parse(JSON.stringify(getSnapshot(State.active)));
+                
+                // Only record if text actually changed
+                if(textBeforeSnapshot && JSON.stringify(textBeforeSnapshot.html) !== JSON.stringify(after.html)) {
+                    recordAction(State.active, 'text', textBeforeSnapshot, after);
+                }
+                
+                textBeforeSnapshot = null;
+            }
+            
+            let textBeforeSnapshot = null; 
+            
+            document.getElementById('f-text').onclick = () => {
+                if(!State.active) {
+                    alert('Please select an element first');
+                    return;
+                }
+                
+                if(State.textEditing) {
+                    finishTextEdit();
+                    return;
+                }
+                
+                // Ensure current HTML is in state
+                if(!State.edits.has(State.active)) initElement(State.active); 
+                State.edits.get(State.active).html = State.active.innerHTML;
+                
+                // Deep Copy Snapshot BEFORE
+                textBeforeSnapshot = JSON.parse(JSON.stringify(getSnapshot(State.active)));
+                
+                State.textEditing = true;
+                State.active.contentEditable = true;
+                State.active.classList.add('forge-text-edit');
+                State.active.focus();
+                
+                setTimeout(() => {
+                    document.execCommand('selectAll', false, null);
+                }, 10);
+            };
+
+            // Colors - Improved Overlay Logic
+            // Colors - Improved Overlay Logic
+            // Colors - Robust Handler (No Orphaned History)
+            
+            // Colors - Robust Handler (No Orphaned History)
+            
+            function rgbToHex(rgb) {
+                if(!rgb) return '#ffffff';
+                if(rgb.startsWith('#')) return rgb;
+                const rgbValues = rgb.match(/\d+/g);
+                if(!rgbValues) return '#ffffff';
+                return '#' + rgbValues.map(x => {
+                    const hex = parseInt(x).toString(16);
+                    return hex.length === 1 ? '0' + hex : hex;
+                }).join('');
+            }
+
+            function updateColorInputs(el) {
+                const bgIn = document.getElementById('f-bg-input');
+                const txtIn = document.getElementById('f-color-input');
+                if(!el) {
+                     bgIn.disabled = true;
+                     txtIn.disabled = true;
+                     bgIn.parentElement.style.opacity = '0.5';
+                     txtIn.parentElement.style.opacity = '0.5';
+                     return;
+                }
+                bgIn.disabled = false;
+                txtIn.disabled = false;
+                bgIn.parentElement.style.opacity = '1';
+                txtIn.parentElement.style.opacity = '1';
+                
+                const comp = window.getComputedStyle(el);
+                bgIn.value = rgbToHex(comp.backgroundColor);
+                txtIn.value = rgbToHex(comp.color);
+                
+                // Update Swatches (v15.3)
+                document.getElementById('swatch-bg').style.backgroundColor = bgIn.value;
+                document.getElementById('swatch-txt').style.backgroundColor = txtIn.value;
+            }
+
+            // v15.0 FIX: Element Locking for Colors
+            let elementBeingColorEdited = null;
+            let colorBeforeSnapshot = null;
+            
+            const bgInput = document.getElementById('f-bg-input');
+
+            // Capture target on FOCUS/MOUSEDOWN
+            const lockColorTarget = () => {
+                if(State.active) {
+                    elementBeingColorEdited = State.active; 
+                    colorBeforeSnapshot = JSON.parse(JSON.stringify(getSnapshot(State.active)));
+                }
+            };
+            
+            bgInput.onfocus = lockColorTarget;
+            bgInput.onclick = lockColorTarget; // Fallback
+
+            bgInput.oninput = (e) => {
+                // Always use the Locked Element
+                const target = elementBeingColorEdited || State.active; 
+                if(!target || !document.body.contains(target)) return;
+ 
+                // Ensure initialized
+                if(!State.edits.has(target)) initElement(target);
+                
+                const val = e.target.value;
+                const d = State.edits.get(target);
+                target.style.backgroundColor = val; 
+                d.bg = val; 
+                // v15.3 Update Swatch Realtime
+                document.getElementById('swatch-bg').style.backgroundColor = val;
+            };
+
+            bgInput.onchange = (e) => {
+                const target = elementBeingColorEdited || State.active;
+                if(!target || !colorBeforeSnapshot) return;
+                
+                const after = JSON.parse(JSON.stringify(getSnapshot(target)));
+                
+                // Only record if changed
+                if(JSON.stringify(colorBeforeSnapshot.bg) !== JSON.stringify(after.bg)) {
+                    recordAction(target, 'color', colorBeforeSnapshot, after);
+                }
+                
+                colorBeforeSnapshot = null;
+                elementBeingColorEdited = null; // Release Lock
+                // Fixed (v15.0): Removed blur() to prevent cascade issues
+            };
+            
+            // TEXT COLOR - Same Logic
+            let textColorBeforeSnapshot = null;
+            let textElementBeingEdited = null;
+            
+            const txtInput = document.getElementById('f-color-input');
+            
+            const lockTextTarget = () => {
+                if(State.active) {
+                    textElementBeingEdited = State.active;
+                    textColorBeforeSnapshot = JSON.parse(JSON.stringify(getSnapshot(State.active)));
+                }
+            };
+            
+            txtInput.onfocus = lockTextTarget;
+            txtInput.onclick = lockTextTarget;
+
+            txtInput.oninput = (e) => {
+                const target = textElementBeingEdited || State.active;
+                if(!target || !document.body.contains(target)) return;
+
+                if(!State.edits.has(target)) initElement(target);
+                
+                const val = e.target.value;
+                const d = State.edits.get(target);
+                target.style.color = val; 
+                d.color = val; 
+                // v15.3 Update Swatch Realtime
+                document.getElementById('swatch-txt').style.backgroundColor = val;
+            };
+            
+            txtInput.onchange = (e) => {
+                const target = textElementBeingEdited || State.active;
+                if(!target || !textColorBeforeSnapshot) return;
+                
+                const after = JSON.parse(JSON.stringify(getSnapshot(target)));
+                
+                if(JSON.stringify(textColorBeforeSnapshot.color) !== JSON.stringify(after.color)) {
+                    recordAction(target, 'color', textColorBeforeSnapshot, after);
+                }
+                
+                textColorBeforeSnapshot = null;
+                textElementBeingEdited = null;
+                // Fixed (v15.0): Removed blur()
+            };
+
+            // v15.17 FIX: SIMPLIFIED INTERACTION MODEL (The "Let It Happen" Fix)
+            // Instead of trying to micromanage blur/focus, we just:
+            // 1. Let ALL clicks pass through by default.
+            // 2. Only STOP propagation if we are clicking the *active input* (to prevent clearing itself).
+            // 3. If clicking canvas or tools, we let the browser handle focus naturally.
+            
+            document.addEventListener('mousedown', (e) => {
+                const activeEl = document.activeElement;
+                const isInputActive = (activeEl === bgInput || activeEl === txtInput);
+                
+                if(isInputActive) {
+                    // If clicking the input itself, do nothing (maintain focus)
+                    if(e.target === activeEl) return;
+                    
+                    // If clicking ANYTHING ELSE (Canvas, Tools, Void),
+                    // Just Blur the input to commit changes.
+                    // We do NOT preventDefault or stopPropagation.
+                    // This allows the "Click" on the Undo button to actually fire.
+                    activeEl.blur();
+                }
+            }, true);
+
+    // Undo/Redo (GLOBAL SYSTEM - v15.0 Selector Based)
+    
+    let isProcessingHistory = false; 
+
+    // Undo/Redo (GLOBAL SYSTEM - v15.1 Targeted)
+    
+    // Helper to find and splice the most recent action for a specific selector
+    function popActionForSelector(stack, selector) {
+        for(let i = stack.length - 1; i >= 0; i--) {
+            if(stack[i].selector === selector) {
+                return stack.splice(i, 1)[0];
+            }
+        }
+        return null;
+    }
+
+    // v15.19 FIX: NUCLEAR OPTION (Global Window Functions + Inline HTML)
+    // We bind directly to window so the inline onclick="..." WORKS 100% of the time.
+    
+    window.handleUndo = (e) => {
+        if(e) { e.preventDefault(); e.stopPropagation(); }
+        
+        if(isProcessingHistory) return; 
+        if(State.textEditing) finishTextEdit();
+        if(State.undoStack.length === 0) return;
+        
+        isProcessingHistory = true;
+        try {
+            let action;
+            if(State.active) {
+                const sel = getSelector(State.active);
+                action = popActionForSelector(State.undoStack, sel);
+                
+                // v15.20 FIX: INTELLIGENT FALLBACK
+                if(!action) {
+                    // If no local history found, fallback to GLOBAL undo.
+                    // This prevents "Dead Button" syndrome.
+                    action = State.undoStack.pop();
+                }
+            } else {
+                action = State.undoStack.pop();
+            }
+
+            if(!action) return;
+            State.redoStack.push(action);
+            const el = document.querySelector(action.selector);
+            if(el) {
+                if(State.active !== el) selectElement(el);
+                applyState(el, action.before);
+            }
+            updateHistoryUI();
+        } finally {
+            isProcessingHistory = false;
+        }
+    };
+
+    window.handleRedo = (e) => {
+         if(e) { e.preventDefault(); e.stopPropagation(); }
+         
+         if(isProcessingHistory) return;
+         if(State.textEditing) finishTextEdit();
+         if(State.redoStack.length === 0) return;
+         
+         isProcessingHistory = true;
+         try {
+             let action;
+             if(State.active) {
+                 const sel = getSelector(State.active);
+                 action = popActionForSelector(State.redoStack, sel);
+                 
+                 // v15.20 FIX: FALLBACK REDO
+                 if(!action) {
+                     action = State.redoStack.pop();
+                 }
+             } else {
+                 action = State.redoStack.pop();
+             }
+             
+             if(!action) return;
+             State.undoStack.push(action);
+             const el = document.querySelector(action.selector);
+             if(el) {
+                 if(State.active !== el) selectElement(el);
+                 applyState(el, action.after);
+             }
+             updateHistoryUI();
+         } finally {
+             isProcessingHistory = false;
+         }
+    };
+
+    // No more manual binding needed. The HTML has onclick="window.handleUndo(event)"
+
+
+
+            // 10. AI EXPORT - ULTRA-PRO SYSTEM
+            function getSelector(el) {
+                if(el.id) return '#' + el.id;
+                
+                let path = [];
+                let curr = el;
+                // Traverse up to 3 levels or until Body/Root
+                for(let i=0; i<3; i++) {
+                    if(!curr || curr.tagName === 'BODY' || curr.id === 'canvas-root') break;
+                    
+                    let tag = curr.tagName.toLowerCase();
+                    let selector = tag;
+                    
+                    if(curr.id) {
+                        selector = '#' + curr.id;
+                        path.unshift(selector);
+                        break; // ID is unique enough
+                    } else if(curr.className) {
+                        // Filter out forge classes
+                        let validClasses = curr.className.split(' ')
+                            .filter(c => !c.startsWith('forge-') && c.trim() !== '')
+                            .join('.');
+                        if(validClasses) selector += '.' + validClasses;
+                    }
+                    
+                    // Add nth-child if it's a generic tag to be precise
+                    if(selector === tag) {
+                        let parent = curr.parentElement;
+                        if(parent) {
+                            let children = Array.from(parent.children);
+                            let index = children.indexOf(curr) + 1;
+                            selector += `:nth-child(${index})`;
+                        }
+                    }
+                    
+                    path.unshift(selector);
+                    curr = curr.parentElement;
+                }
+                
+                return path.join(' > ');
+            }
+
+            // VARIABLE: Track auto-scanned changes for reporting
+            let autoScannedCount = 0;
+
+            const generateChangeManifest = () => {
+                if(State.changeLog.size === 0) {
+                    return "### CHANGE MANIFEST\nNo tracked changes. If you edited elements, re-select them before exporting.\n\n";
+                }
+
+                const root = document.getElementById('canvas-root');
+                const rootRect = root ? root.getBoundingClientRect() : null;
+
+                let manifest = "### CHANGE MANIFEST (CSS Property Diffs v3 + Auto-Scan Detection)\n";
+                manifest += `🚨 ABSOLUTE ELEMENT COUNT: ${State.changeLog.size} elements changed\n`;
+                if(autoScannedCount > 0) {
+                    manifest += `ℹ️ AUTO-SCAN: Detected ${autoScannedCount} additional untracked changes and added them\n`;
+                }
+                manifest += `⚠️ CRITICAL: You MUST update ALL ${State.changeLog.size} elements listed below. NO EXCEPTIONS. NO SKIPS.\n`;
+                manifest += `✅ VERIFICATION: Before responding, count your updates and verify you updated all ${State.changeLog.size} elements.\n\n`;
+                
+                let index = 1;
+                State.changeLog.forEach((entry) => {
+                    let el = document.querySelector(entry.selector);
+                    if(!el && entry.exportId) {
+                        el = document.querySelector(`[data-export-id="${entry.exportId}"]`);
+                    }
+
+                    manifest += `## ELEMENT ${index}/${State.changeLog.size}\n`;
+                    manifest += `**ExportID**: \`${entry.exportId || 'NO-ID'}\`\n`;
+                    manifest += `**Selector**: \`${entry.selector}\`\n`;
+
+                    if(el) {
+                        const tag = el.tagName.toLowerCase();
+                        const classes = el.className || '(none)';
+                        const text = (el.innerText || el.textContent || '').replace(/\n/g, ' ').trim().slice(0, 60);
+                        manifest += `**Tag**: \`<${tag}>\`\n`;
+                        manifest += `**Classes**: \`${classes}\`\n`;
+                        manifest += `**Text Content**: "${text}"\n`;
+
+                        // Parent context
+                        const parent = el.parentElement;
+                        if(parent && parent.id !== 'canvas-root') {
+                            manifest += `**Parent**: \`<${parent.tagName.toLowerCase()}${parent.id ? '#' + parent.id : ''}>\`\n`;
+                        }
+
+                        // Computed styles
+                        const computed = window.getComputedStyle(el);
+                           const vw = window.innerWidth;
+                           const vh = window.innerHeight;
+                       
+                           // Parse pixel values and convert to viewport units
+                           const parsePixels = (val) => parseFloat(val) || 0;
+                           const leftPx = parsePixels(computed.left);
+                           const topPx = parsePixels(computed.top);
+                           const widthPx = parsePixels(computed.width);
+                           const heightPx = parsePixels(computed.height);
+                       
+                           const leftVw = (leftPx / vw * 100).toFixed(3) + 'vw';
+                           const topVh = (topPx / vh * 100).toFixed(3) + 'vh';
+                           const widthVw = (widthPx / vw * 100).toFixed(3) + 'vw';
+                           const heightVh = (heightPx / vh * 100).toFixed(3) + 'vh';
+                       
+                           manifest += `**Current Position**: left=${computed.left} (${leftVw}), top=${computed.top} (${topVh})\n`;
+                           manifest += `**Current Size**: width=${computed.width} (${widthVw}), height=${computed.height} (${heightVh})\n`;
+                        manifest += `**Current Colors**: bg=${computed.backgroundColor}, color=${computed.color}\n`;
+                        manifest += `**Transform**: ${computed.transform}\n`;
+
+                        // Exact position percentages
+                        if(rootRect) {
+                            const rect = el.getBoundingClientRect();
+                            const relL = rect.left - rootRect.left;
+                            const relT = rect.top - rootRect.top;
+                            const leftP = (relL / rootRect.width * 100).toFixed(3);
+                            const topP = (relT / rootRect.height * 100).toFixed(3);
+                            const widthP = (rect.width / rootRect.width * 100).toFixed(3);
+                            const heightP = (rect.height / rootRect.height * 100).toFixed(3);
+                            manifest += `**Exact Geometry**: L=${leftP}%, T=${topP}%, W=${widthP}%, H=${heightP}%\n`;
+                            manifest += `**Viewport Geometry**: left=${leftP}vw, top=${topP}vh, width=${widthP}vw, height=${heightP}vh\n`;
+                        }
+                    }
+
+                    // Change types
+                    const types = Array.from(entry.types).join(', ');
+                    manifest += `**Change Types**: ${types}\n`;
+
+                    // Property diffs
+                    manifest += `**BEFORE**: \`\`\`json\n${JSON.stringify(entry.first, null, 2)}\n\`\`\`\n`;
+                    manifest += `**AFTER**: \`\`\`json\n${JSON.stringify(entry.last, null, 2)}\n\`\`\`\n`;
+
+                    // Extract specific property changes
+                    const b = entry.first;
+                    const a = entry.last;
+                       const vw = window.innerWidth;
+                       const vh = window.innerHeight;
+                    manifest += `**EXACT CHANGES TO APPLY**:\n`;
+                          if(b.x !== a.x || b.y !== a.y) {
+                              const xVw = (a.x / vw * 100).toFixed(3);
+                              const yVh = (a.y / vh * 100).toFixed(3);
+                              const xBeforeVw = (b.x / vw * 100).toFixed(3);
+                              const yBeforeVh = (b.y / vh * 100).toFixed(3);
+                              manifest += `- translate_viewport: translate(${xVw}vw, ${yVh}vh) [was: translate(${xBeforeVw}vw, ${yBeforeVh}vh)] ⭐ DEFAULT RESPONSIVE\n`;
+                              manifest += `- translate_ref_px: translate(${a.x}px, ${a.y}px) [was: translate(${b.x}px, ${b.y}px)] ⭐ REFERENCE-LOCK ONLY\n`;
+                          }
+                    if(b.scale !== a.scale) {
+                        manifest += `- Scale: ${a.scale} [was: ${b.scale}]\n`;
+                    }
+                    if(b.rotate !== a.rotate) {
+                        manifest += `- Rotate: ${a.rotate}deg [was: ${b.rotate}deg]\n`;
+                    }
+                    if(b.bg !== a.bg) {
+                        manifest += `- Background-color: ${a.bg || 'none'} [was: ${b.bg || 'none'}]\n`;
+                    }
+                    if(b.color !== a.color) {
+                        manifest += `- Color: ${a.color || 'inherit'} [was: ${b.color || 'inherit'}]\n`;
+                    }
+                    if(b.zIndex !== a.zIndex) {
+                        manifest += `- Z-Index (ANTI-MERGE): ${a.zIndex || 0} [was: ${b.zIndex || 0}] ⚠️ THIS ELEMENT MUST NOT MERGE WITH OTHERS\n`;
+                    }
+                    if(b.html !== a.html) {
+                        manifest += `- HTML Content CHANGED [text was edited]\n`;
+                    }
+
+                    manifest += `\n---\n\n`;
+                    index++;
+                });
+
+                manifest += `\n✅ VERIFICATION CHECKPOINT:\n`;
+                manifest += `- Total elements to update: ${State.changeLog.size}\n`;
+                manifest += `- Count your CSS updates before responding\n`;
+                manifest += `- If your count ≠ ${State.changeLog.size}, you missed elements\n\n`;
+
+                return manifest;
+            };
+
+            document.getElementById('f-export').onclick = () => {
+                // Ensure export IDs exist on all elements
+                const root = document.getElementById('canvas-root');
+                if(root) {
+                    root.querySelectorAll('*').forEach(el => ensureExportId(el));
+                }
+
+                // VALIDATION: Count total changed elements before generating manifest
+                const totalChangedBefore = State.changeLog.size;
+                
+                // AUTO-SCAN: Force detection of ALL visual changes in canvas
+                if(root) {
+                    root.querySelectorAll('*').forEach(el => {
+                        // Initialize if never touched
+                        if(!State.edits.has(el)) {
+                            initElement(el);
+                        }
+                        
+                        // Compare current state with initial snapshot
+                        if(State.initialSnapshots.has(el)) {
+                            const initial = State.initialSnapshots.get(el);
+                            const current = getSnapshot(el);
+                            
+                            // Deep equality check
+                            const changed = JSON.stringify(initial) !== JSON.stringify(current);
+                            
+                            if(changed) {
+                                const sel = getSelector(el);
+                                // Auto-record any untracked changes
+                                if(!State.changeLog.has(sel)) {
+                                    State.changeLog.set(sel, {
+                                        selector: sel,
+                                        exportId: el.dataset ? el.dataset.exportId : undefined,
+                                        first: JSON.parse(JSON.stringify(initial)),
+                                        last: JSON.parse(JSON.stringify(current)),
+                                        types: new Set(['auto-detected-change'])
+                                    });
+                                }
+                            }
+                        }
+                    });
+                }
+
+                // VALIDATION: Check if auto-scan found additional changes
+                const totalChangedAfter = State.changeLog.size;
+                autoScannedCount = totalChangedAfter - totalChangedBefore;
+                
+                // 1. CAPTURE DIRTY HTML (Without UI Tools)
+                let clone = document.body.cloneNode(true);
+                
+                // Remove Forge UI elements
+                let uiElements = clone.querySelectorAll('.forge-dock, .forge-launcher, script, .confirm-overlay');
+                uiElements.forEach(el => el.remove());
+                
+                // Remove injected styles (optional, but keeps it cleaner)
+                let injectedStyles = clone.querySelectorAll('style');
+                injectedStyles.forEach(s => {
+                    if(s.innerHTML.includes('forge-launcher')) s.remove();
+                });
+
+                let dirtyHTML = clone.innerHTML.trim();
+
+                // v15.30 FIX: ADVANCED SPATIAL MANIFEST (Quadrants + Center Math)
+                const generateSpatialManifest = () => {
+                    let manifest = "### SPATIAL MANIFEST (Mathematical Truth v2)\n";
+                    manifest += "Canvas Size: " + document.getElementById('canvas-root').getBoundingClientRect().width + "x" + document.getElementById('canvas-root').getBoundingClientRect().height + "px\n\n";
+                    manifest += "| ID | Snippet | Quad | Center(px) | L% | T% | W% | H% |\n";
+                    manifest += "|---|---|---|---|---|---|---|---|\n";
+                    
+                    const root = document.getElementById('canvas-root');
+                    if(!root) return "No Canvas Root found.";
+                    
+                    const rootRect = root.getBoundingClientRect();
+                    const mx = rootRect.width / 2;
+                    const my = rootRect.height / 2;
+                    
+                    const children = Array.from(root.children);
+                    
+                    children.forEach(el => {
+                        if(el.style.display === 'none') return;
+                        
+                        const rect = el.getBoundingClientRect();
+                        
+                        // Relative Coords
+                        const relL = rect.left - rootRect.left;
+                        const relT = rect.top - rootRect.top;
+                        
+                        // Center Point
+                        const cx = relL + (rect.width / 2);
+                        const cy = relT + (rect.height / 2);
+                        
+                        // Quadrant Logic
+                        let quadH = (cx < mx) ? "Left" : "Right";
+                        let quadV = (cy < my) ? "Top" : "Bottom";
+                        let quad = quadV + "-" + quadH; // e.g., Top-Left
+                        
+                        // Center Tolerance (if within 10% of center)
+                        if(Math.abs(cx - mx) < (rootRect.width * 0.1)) quadH = "Center";
+                        if(Math.abs(cy - my) < (rootRect.height * 0.1)) quadV = "Center";
+                        if(quadH === "Center" && quadV === "Center") quad = "Absolute-Center";
+                        
+                        // Percentages
+                        const leftP = (relL / rootRect.width * 100).toFixed(1);
+                        const topP = (relT / rootRect.height * 100).toFixed(1);
+                        const widthP = (rect.width / rootRect.width * 100).toFixed(1);
+                        const heightP = (rect.height / rootRect.height * 100).toFixed(1);
+                        
+                        let snippet = (el.innerText || el.textContent || '').substr(0, 10).replace(/\n/g, '').trim();
+                        if(!snippet && el.tagName === 'IMG') snippet = "IMG";
+                        let id = el.id || 'NO-ID';
+                        
+                        manifest += `| ${id} | ${snippet} | ${quad} | ${Math.round(cx)},${Math.round(cy)} | ${leftP} | ${topP} | ${widthP} | ${heightP} |\n`;
+                    });
+                    
+                    return manifest;
+                };
+
+                let spatialData = generateSpatialManifest();
+                let changeData = generateChangeManifest();
+
+                // 2. GENERATE PROMPT
+                const referenceWidth = window.innerWidth;
+                const referenceHeight = window.innerHeight;
+                
+                let prompt = "You are the Rendering Engine for a Pro Visual Builder. The USER has manually positioned every element. Your goal is EXPENSIVE, PRODUCTION-READY code and make whole thing responsive.\n\n";
+                prompt += "📐 REFERENCE VIEWPORT: " + referenceWidth + "px × " + referenceHeight + "px (All calculations are based on this screen size)\n\n";
+                prompt += "YOUR MANDATE:\n";
+                prompt += "1. **Viewport-Responsive Positioning (CRITICAL)**: \n";
+                prompt += "   - ⚠️ PROBLEM SOLVED: Elements now use VIEWPORT UNITS (vw/vh) that scale proportionally with screen size.\n";
+                prompt += "   - **KEEP USER-EDITED POSITIONS (HARD RULE)**: Do NOT reset elements to their original/default positions when the viewport changes. Treat the user-edited layout as the source of truth and keep it visually consistent as long as possible. Only move elements when it becomes impossible to preserve the layout without overlap or clipping.\n";
+                prompt += "   - **PRECISION AT ANY SIZE**: At the reference viewport (" + referenceWidth + "×" + referenceHeight + "), positions are pixel-perfect. At other sizes, they scale proportionally.\n";
+                prompt += "   - **USE VIEWPORT UNITS**: The Change Manifest provides both pixel values AND viewport units (vw/vh). You MUST use vw/vh for all positioning.\n";
+                prompt += "   - **NO FIXED PIXELS**: Never use fixed px values for positioning/transforms. Always use vw for horizontal, vh for vertical, vmin/vmax for sizing where appropriate.\n";
+                prompt += "   - **OVERLAP PREVENTION**: At smaller screens, if elements would overlap, use CSS media queries to reflow layout. But maintain vw/vh units at all sizes.\n";
+                prompt += "   - **EXAMPLE**: Instead of `transform: translate(150px, 80px)`, use `transform: translate(10.417vw, 6.667vh)` (values provided in manifest).\n\n";
+                prompt += "2. **Pixel-Perfect Mandate (Reference Device)**: \n";
+                prompt += "   - **ABSOLUTE PRECISION**: You MUST use the exact viewport percentages provided in the Change Manifest.\n";
+                prompt += "   - **NO APPROXIMATIONS**: Do not round values like `10.417vw` to `10vw`. Use the exact decimal provided (3 decimal places).\n";
+                prompt += "   - **AT REFERENCE SIZE**: On the reference viewport (" + referenceWidth + "×" + referenceHeight + "), elements MUST be pixel-perfect.\n";
+                prompt += "   - **OTHER SIZES MAY REPOSITION**: At different viewport sizes, elements MAY change position to maintain good responsiveness (use media queries or layout reflow).\n";
+                prompt += "   - **LOCK ONLY THE REFERENCE VIEW**: The reference viewport is the single source of truth for exact placement.\n";
+                prompt += "   - **REFERENCE-LOCK SYSTEM**: Use vw/vh for default responsiveness, and apply px-locked values ONLY at the exact reference size:\n";
+                prompt += "     `@media (width: " + referenceWidth + "px) and (height: " + referenceHeight + "px) { /* use translate_ref_px */ }`\n";
+                prompt += "3. **Isolation & No Side-Effects (CRITICAL)**: \n";
+                prompt += "   - **ONLY edit elements listed in the Change Manifest.** Do not touch unrelated elements.\n";
+                prompt += "   - **No global changes** that affect other components (avoid blanket rules like `*`, `body`, `div`, or broad selectors).\n";
+                prompt += "   - **Scope styles** to the exact selector or export-id for each element.\n";
+                prompt += "   - If you must introduce a wrapper, it MUST be neutral (no new margins/padding/positioning that changes layout).\n";
+                prompt += "   - Any structural refactor must preserve the exact visual output at the reference viewport.\n\n";
+
+                prompt += "4. **Code Structure & Coordinate System (CRITICAL)**: \n";
+                prompt += "   - Do NOT add wrappers/containers unless absolutely required. Prefer no structural changes.\n";
+                prompt += "   - Any parent container used for positioning MUST be `position: relative;` and documented; adjust coordinates accordingly.\n";
+                prompt += "   - Every element in the Manifest must explicitly declare `position` (absolute/relative/fixed as appropriate). Do NOT rely on inherited layout flow.\n";
+                prompt += "   - **Z-INDEX FOR ANTI-MERGE**: If an element has a z-index value (in EXACT CHANGES TO APPLY), it means that element MUST NOT merge/overlap with others. Apply `z-index: <value>;` to keep it visually separated and on top. This is CRITICAL to prevent visual merging.\n";
+                prompt += "   - **MANDATORY MERGE PREVENTION**: Any two elements that occupy the same space MUST have different z-index values. If they would overlap, the one with higher z-index must visually appear on top and NOT merge into the background element.\n";
+                prompt += "   - If Viewport Geometry provides width/height, you MUST apply them using `vw/vh`. Do NOT leave size fluid.\n";
+                prompt += "   - Remove any inline `transform` styles and migrate them into CSS selectors only.\n";
+                prompt += "   - If Tailwind/utility classes interfere with viewport geometry, override them ONLY for the listed elements using scoped selectors.\n";
+                prompt += "5. **Fluid Responsiveness & Border Safety**: \n";
+                prompt += "   - **REFERENCE LOCK + RESPONSIVE FREEDOM**: Keep exact positions ONLY at the reference viewport. At other sizes, you may reflow/reposition for best layout.\n";
+                prompt += "   - **RESPONSIVE CONSISTENCY (HARD RULE)**: At any size, keep elements as visually close to their original reference position as possible. Do NOT move things freely. Only shift positions when it is impossible to keep the original placement without overlap or clipping.\n";
+                prompt += "   - **BREAKPOINT REPOSITIONING ALLOWED**: Use media queries to adjust positions, spacing, and layout at smaller or larger screens.\n";
+                prompt += "   - **BREAKPOINT POLICY**: Reflow must preserve element ordering and relative proximity to reference positions.\n";
+                prompt += "   - **NO OVERLAP / NO CLIP**: At ANY screen size, elements must NOT overlap each other, must NOT be cut off, and must NOT go outside the viewport.\n";
+                prompt += "   - **OVERFLOW RULES**: Use `overflow: visible/hidden` and `clamp()` when needed to keep elements inside the viewport.\n";
+                prompt += "   - **BORDER GUARD**: Elements must **NEVER overlap with borders** or get cut off. Use vmin/vmax or media queries if needed to prevent overflow.\n";
+                prompt += "   - **RESPONSIVE REFLOW**: At extreme aspect ratios (very narrow/wide), stack or rearrange elements for readability.\n";
+                prompt += "   - **USE VIEWPORT GEOMETRY VALUES**: Each element includes Viewport Geometry (left/top/width/height in vw/vh). Use these as anchor values when you reflow elements.\n";
+                prompt += "   - **SMART CLAMPING**: When needed, use CSS `clamp()` with the viewport geometry to keep elements within bounds.\n";
+                prompt += "6. **Output Integrity**: Return the **FULL, UPDATED CODE** (HTML + CSS + JS). \n";
+                prompt += "   - The site must 'Work with No Problem'.\n";
+                prompt += "   - All positioning MUST use viewport units (vw/vh) as provided in the Change Manifest.\n\n";
+                
+                prompt += "7. **Change Manifest (Absolute Accuracy - ZERO TOLERANCE)**: \n";
+                prompt += "   - 🚨 CRITICAL: The Change Manifest lists EVERY element that MUST change. NO EXCEPTIONS.\n";
+                prompt += "   - **MANDATE: YOU MUST UPDATE 100% OF LISTED ELEMENTS. IF THE MANIFEST SAYS 15 CHANGED, UPDATE ALL 15.**\n";
+                prompt += "   - **COUNTING REQUIREMENT**: Before your response, count every element you updated. If count < manifest total, STOP and update the missing ones.\n";
+                prompt += "   - Each element has: ExportID, Selector, Tag, Classes, Text, Parent, Position, Colors, Transform.\n";
+                prompt += "   - **VIEWPORT UNITS PROVIDED**: Each element shows responsive vw/vh values and a reference-only px lock.\n";
+                prompt += "   - Use 'EXACT CHANGES TO APPLY' section: apply translate_viewport as default, and translate_ref_px ONLY inside the reference-lock media query.\n";
+                prompt += "   - **DO NOT SKIP. DO NOT MERGE. DO NOT IGNORE.** Update each listed element individually and completely.\n";
+                prompt += "   - PRESERVE all data-export-id attributes exactly as shown. They are the anchor for verification.\n";
+                prompt += "   - **VERIFICATION**: At the end, list each updated element's ExportID in order. Count MUST match manifest total. If mismatch, do not submit response.\n\n";
+                prompt += changeData + "\n";
+                prompt += "8. **Mathematical Truth (Spatial Manifest)**: \n";
+                prompt += "   - Below is the EXACT position table. Use this to verify your CSS math.\n";
+                prompt += "   - Even if you change the code structure, the final elements MUST visually align with these percentages on the reference viewport.\n";
+                prompt += "   - These percentages are for verification. In your CSS, convert them to vw/vh units as shown in the Change Manifest.\n\n";
+                prompt += spatialData + "\n\n";
+                
+                prompt += "9. **Pre-Response Verification Checklist**:\n";
+                prompt += "   Before you return code, verify:\n";
+                prompt += "   - [ ] I counted the elements in Change Manifest\n";
+                prompt += "   - [ ] I updated that exact number of elements in my CSS\n";
+                prompt += "   - [ ] I preserved all data-export-id attributes\n";
+                prompt += "   - [ ] I used VIEWPORT UNITS (vw/vh) for all positioning (NOT px)\n";
+                prompt += "   - [ ] I applied translate_viewport by default and translate_ref_px only inside the reference-lock media query\n";
+                prompt += "   - [ ] My CSS selectors match the ExportID or Selector from the manifest\n";
+                prompt += "   - [ ] I did NOT skip any elements or merge unrelated changes\n";
+                prompt += "   - [ ] I verified positions scale proportionally when viewport size changes\n";
+                prompt += "   - [ ] I verified NO overlap and NO clipping at common sizes (360, 768, 1024, 1440)\n\n";
+
+                prompt += "### Pro Visual Builder: Rendering Engine Logic (Reference Steps)\n";
+                prompt += "1. Establish the Reference Baseline: Use the fixed viewport as the source of truth (Standard Reference: 1536px × 730px). Ensure pixel-perfect layout at this size.\n";
+                prompt += "2. Convert Pixels to Viewport Units: Horizontal vw = (Pixel X / 1536) * 100, Vertical vh = (Pixel Y / 730) * 100.\n";
+                prompt += "3. Apply the Reference Lock Pattern: Default uses translate(vw, vh); at the exact reference size, override with translate(px, px) via @media (width: 1536px) and (height: 730px).\n";
+                prompt += "4. Implement Border Safety & Reflow: Use @media (max-width: 768px) to prevent overlap; apply max-width: 100vw and overflow-x: hidden on body if needed.\n";
+                prompt += "5. Element Isolation (ExportID Mandate): Assign unique data-export-id and use ID-specific selectors to avoid affecting unrelated elements.\n\n";
+                
+                prompt += "Input Raw Design:\n";
+                prompt += "```html\n" + dirtyHTML + "\n```\n\n";
+                prompt += "Return the clean HTML and CSS. If the user provided any JavaScript, include it in the output unless the user explicitly says to remove it.\n";
+                prompt += "The result must remain fully responsive: use vw/vh for positioning and only reflow when necessary to prevent overlap or clipping.\n";
+                prompt += "Required Output:\n";
+                prompt += "```html\n<clean-html>\n```\n";
+                prompt += "```css\n/* clean-css */\n```\n";
+                prompt += "```js\n// clean-js (only if needed)\n```";
+
+                exportModal.querySelector('textarea').value = prompt;
+                exportModal.classList.add('open');
+            };    
+
+        })();
+    </script>
+
+
+
+
+    <!-- MAIN APP LOGIC -->
+    <script>
+        // TABS LOGIC
+        function setTab(mode) {
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.code-container').forEach(c => c.classList.remove('active'));
+
+            const tabs = Array.from(document.querySelectorAll('.tab'));
+            const index = ['html', 'css', 'js', 'upload', 'link'].indexOf(mode);
+            if (index > -1 && tabs[index]) tabs[index].classList.add('active');
+
+            document.getElementById('area-' + mode).classList.add('active');
+        }
+
+        async function loadFromUrl() {
+            const urlInput = document.getElementById('url-input');
+            const status = document.getElementById('fetch-status');
+            const btn = document.getElementById('btn-fetch');
+
+            let url = urlInput.value.trim();
+            if (!url) {
+                status.innerText = '⚠️ Please enter a URL';
+                status.style.color = '#ef4444';
+                return;
+            }
+
+            if (!url.startsWith('http')) {
+                url = 'https://' + url;
+                urlInput.value = url;
+            }
+
+            const originalText = btn.innerText;
+            btn.innerText = 'Connecting...';
+            btn.style.opacity = 0.5;
+            btn.style.pointerEvents = 'none';
+            status.innerText = 'Initializing...';
+            status.style.color = '#a1a1aa';
+
+            const proxies = [
+                (u) => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
+                (u) => `https://corsproxy.io/?${encodeURIComponent(u)}`
+            ];
+
+            let htmlContent = null;
+            let success = false;
+            let lastError = '';
+
+            for (let i = 0; i < proxies.length; i++) {
+                try {
+                    status.innerText = `Trying Proxy ${i + 1}/${proxies.length}...`;
+
+                    const controller = new AbortController();
+                    const timeoutId = setTimeout(() => controller.abort(), 10000);
+
+                    const res = await fetch(proxies[i](url), { signal: controller.signal });
+                    clearTimeout(timeoutId);
+
+                    if (res.ok) {
+                        htmlContent = await res.text();
+                        if (htmlContent && htmlContent.length > 50) {
+                            success = true;
+                            break;
+                        }
+                    }
+                } catch (e) {
+                    lastError = e.message;
+                    console.log(`Proxy ${i} failed:`, e.message);
+                }
+            }
+
+            if (success && htmlContent) {
+                status.innerText = 'Processing assets...';
+                status.style.color = '#fbbf24';
+
+                const baseTag = `<base href="${url}">`;
+                if (htmlContent.includes('<head>')) {
+                    htmlContent = htmlContent.replace('<head>', `<head>${baseTag}`);
+                } else if (htmlContent.includes('<html>')) {
+                    htmlContent = htmlContent.replace('<html>', `<html><head>${baseTag}</head>`);
+                } else {
+                    htmlContent = `<head>${baseTag}</head>` + htmlContent;
+                }
+
+                const scriptBlock = `<script>
+                    document.addEventListener('click', e => {
+                        if(e.target.tagName === 'A') { 
+                            e.preventDefault(); 
+                            console.log('Navigation prevented'); 
+                        }
+                    });
+                <\/script>`;
+                htmlContent += scriptBlock;
+
+                status.innerText = '✅ Done! Launching...';
+                status.style.color = '#4ade80';
+
+                await new Promise(r => setTimeout(r, 200));
+                launchApp(htmlContent);
+            } else {
+                status.innerText = '❌ Failed to fetch. Try copying HTML directly.';
+                status.style.color = '#ef4444';
+
+                alert(
+                    "⚠️ Could not fetch this website.\n\n" +
+                    "Reason: Most websites block these requests for security.\n\n" +
+                    "Solution: Copy HTML directly:\n" +
+                    "1. Open the website in a new tab\n" +
+                    "2. Right-click → View Page Source\n" +
+                    "3. Select all (Ctrl+A)\n" +
+                    "4. Copy (Ctrl+C)\n" +
+                    "5. Paste in the HTML tab above\n" +
+                    "6. Click Launch\n\n" +
+                    (lastError ? `Error details: ${lastError}` : '')
+                );
+            }
+
+            btn.innerText = originalText;
+            btn.style.opacity = 1;
+            btn.style.pointerEvents = 'auto';
+        }
+
+        // FILE LOADING
+        function loadFile(input) {
+            const file = input.files[0];
+            if (!file) return;
+
+            // FIXED - Validate type
+            if (!file.name.endsWith('.html')) {
+                alert('⚠️ Please upload an .html file (not .zip or other formats)');
+                input.value = '';
+                return;
+            }
+
+            // FIXED - Validate size (limit 5MB)
+            if (file.size > 5 * 1024 * 1024) {
+                alert('⚠️ File is too large (max 5MB). Please use a smaller file.');
+                input.value = '';
+                return;
+            }
+
+            const reader = new FileReader();
+
+            // FIXED - Handle read errors
+            reader.onerror = () => {
+                alert('❌ Error reading file. Make sure it\'s a valid HTML file.');
+                input.value = '';
+            };
+
+            reader.onload = (e) => {
+                const content = e.target.result;
+
+                // FIXED - Validate content
+                if (!content || content.length < 10) {
+                    alert('⚠️ File is empty or too small');
+                    input.value = '';
+                    return;
+                }
+
+                // Check if it looks like HTML
+                if (!content.includes('<') || !content.includes('>')) {
+                    alert('⚠️ File doesn\'t look like HTML');
+                    input.value = '';
+                    return;
+                }
+
+                launchApp(content);
+                input.value = '';  // Clear for next upload
+            };
+
+            // FIXED - Abort handler
+            reader.onabort = () => {
+                alert('❌ File reading was cancelled');
+                input.value = '';
+            };
+
+            reader.readAsText(file);
+        }
+
+        // EXIT FLOW
+        function exitApp() {
+            document.getElementById('confirm-modal').style.display = 'flex';
+        }
+        function closeConfirm() {
+            document.getElementById('confirm-modal').style.display = 'none';
+        }
+        function realExit() {
+            document.getElementById('confirm-modal').style.display = 'none';
+            document.getElementById('preview-view').style.display = 'none';
+        }
+
+        // LAUNCH
+        function launchApp(overrideHtml) {
+            const html = (typeof overrideHtml === 'string') ? overrideHtml : document.getElementById('in-html').value;
+
+            // FIXED - Validate HTML exists
+            if (!html || !html.trim()) {
+                alert('⚠️ Please enter HTML content first before launching');
+                return;
+            }
+
+            // Show loading state
+            const preview = document.getElementById('preview-view');
+            const loading = document.createElement('div');
+            loading.style.cssText = 'position:absolute; inset:0; background:rgba(0,0,0,0.5); display:flex; align-items:center; justify-content:center; z-index:9999; color:white; font-size:20px;';
+            loading.innerHTML = '<div>⏳ Loading Architecture...</div>';
+            preview.appendChild(loading);
+
+            // Use timeout to allow UI to render loading state
+            setTimeout(() => {
+                const css = document.getElementById('in-css').value;
+                const js = document.getElementById('in-js').value;
+                const blueprint = document.getElementById('blueprint-script').innerText;
+
+                const finalCode =
+                    '\x3C!DOCTYPE html\x3E\x3Chtml\x3E\x3Chead\x3E' +
+                    '\x3Cstyle\x3E' + css + '\x3C/style\x3E' +
+                    '\x3Cstyle\x3Ebody { margin: 0; overflow-x:hidden; }\x3C/style\x3E' +
+                    '\x3C/head\x3E\x3Cbody\x3E' +
+                    '\x3Cdiv id="canvas-root"\x3E' + html + '\x3C/div\x3E' +
+                    '\x3Cscript\x3E' + js + '\x3C/script\x3E' +
+                    '\x3Cscript\x3E' + blueprint + '\x3C/script\x3E' +
+                    '\x3C/body\x3E\x3C/html\x3E';
+
+                const iframe = document.getElementById('sandbox');
+                preview.style.display = 'block';
+                const doc = iframe.contentWindow.document;
+                doc.open();
+                doc.write(finalCode);
+                doc.close();
+
+                // CRITICAL: Initialize snapshots for ALL elements on canvas after load
+                setTimeout(() => {
+                    const root = iframe.contentWindow.document.getElementById('canvas-root');
+                    if(root) {
+                        // Get all elements in canvas (except canvas-root itself)
+                        const allElements = root.querySelectorAll('*');
+                        allElements.forEach(el => {
+                            // Initialize snapshot for each element if not already done
+                            if(!iframe.contentWindow.State) return; // Blueprint not loaded yet
+                            if(!iframe.contentWindow.State.edits.has(el)) {
+                                // Capture initial snapshot
+                                const style = iframe.contentWindow.getComputedStyle(el);
+                                iframe.contentWindow.State.initialSnapshots.set(el, {
+                                    left: el.offsetLeft,
+                                    top: el.offsetTop,
+                                    width: el.offsetWidth,
+                                    height: el.offsetHeight,
+                                    transform: style.transform,
+                                    backgroundColor: style.backgroundColor,
+                                    color: style.color,
+                                    innerHTML: el.innerHTML,
+                                    outerHTML: el.outerHTML
+                                });
+                                iframe.contentWindow.State.edits.set(el, {
+                                    positions: [],
+                                    transforms: [],
+                                    colorChanges: [],
+                                    textChanges: []
+                                });
+                            }
+                        });
+                    }
+                }, 100);
+
+                loading.remove();
+            }, 50);
+        }
+    </script>
+</body>
+
+</html>
